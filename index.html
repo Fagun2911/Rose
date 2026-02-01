@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Rose Day ❤️</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Segoe UI', sans-serif;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff4e50,#ffb6c1);
+    color:white;
+    text-align:center;
+    overflow:hidden;
+}
+
+/* Falling Roses */
+.rose{
+    position:fixed;
+    top:-10%;
+    font-size:24px;
+    animation:fall linear forwards;
+    pointer-events:none;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh);
+    }
+}
+
+/* Glowing Heading */
+.heading{
+    position:absolute;
+    top:3%;
+    width:100%;
+    font-size:44px;
+    font-weight:bold;
+    display:none;
+    background:linear-gradient(90deg,#fff,#ffe6f0,#fff);
+    -webkit-background-clip:text;
+    color:transparent;
+    animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+    from{ text-shadow:0 0 10px #fff;}
+    to{ text-shadow:0 0 30px #ff4da6;}
+}
+
+/* Rose Heart */
+.heart{
+    position:absolute;
+    top:14%;
+    width:100%;
+    display:none;
+    white-space:pre;
+    font-size:20px;
+    color:#ff1a75;
+}
+
+/* Card */
+.container{
+    background:rgba(255,255,255,0.15);
+    padding:40px;
+    border-radius:20px;
+    backdrop-filter:blur(10px);
+    box-shadow:0 0 25px rgba(0,0,0,0.2);
+    width:370px;
+    z-index:10;
+}
+
+.hidden{
+    display:none;
+}
+
+.big-rose{
+    font-size:80px;
+}
+
+/* Love Text */
+.magic-text{
+    font-size:26px;
+    margin-top:15px;
+    animation:fadeIn 3s ease-in-out;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+input{
+    padding:10px;
+    border:none;
+    border-radius:10px;
+    width:80%;
+    margin-top:15px;
+    outline:none;
+    font-size:16px;
+}
+
+button{
+    margin-top:15px;
+    padding:10px 25px;
+    border:none;
+    border-radius:20px;
+    background:#ff3366;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#ff0033;
+    transform:scale(1.05);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="heading" id="title">
+🌹 Happy Rose Day My Khushi 🌹
+</div>
+
+<div class="heart" id="heart">
+🌹🌹   🌹🌹
+🌹🌹🌹 🌹🌹🌹
+🌹🌹🌹🌹🌹🌹🌹
+ 🌹🌹🌹🌹🌹
+  🌹🌹🌹🌹
+   🌹🌹🌹
+    🌹🌹
+     🌹
+</div>
+
+<!-- Login -->
+<div class="container" id="login">
+    <h2>🔐 Enter Password</h2>
+    <p>Hint: It's a beautiful flower 🌹</p>
+    <input type="password" id="password" placeholder="Enter Password">
+    <br>
+    <button onclick="checkPassword()">Unlock</button>
+    <p id="error" style="color:yellow;"></p>
+</div>
+
+<!-- Surprise -->
+<div class="container hidden" id="surprise">
+    <div class="big-rose">🌹</div>
+    <h1>I Love You ❤️</h1>
+
+    <div class="magic-text">
+        Khushi ❤️ You Are The Most Beautiful Part Of My Life.
+        <br><br>
+        Like roses make a garden beautiful,  
+        you make my world magical.
+        <br><br>
+        🌹 Happy Rose Day 🌹
+    </div>
+</div>
+
+<script>
+
+// PASSWORD = Rose (case insensitive)
+function checkPassword(){
+
+    const correctPassword = "rose";
+    const entered = document.getElementById("password").value.toLowerCase();
+
+    if(entered === correctPassword){
+
+        document.getElementById("login").style.display="none";
+        document.getElementById("surprise").style.display="block";
+        document.getElementById("title").style.display="block";
+        document.getElementById("heart").style.display="block";
+
+        startMagicRoses();
+    }
+    else{
+        document.getElementById("error").innerText="Wrong password! Try again ❤️";
+    }
+}
+
+// Falling roses before unlock
+function createRose(){
+    const rose = document.createElement("div");
+    rose.classList.add("rose");
+    rose.innerHTML="🌹";
+
+    rose.style.left=Math.random()*100+"vw";
+    rose.style.animationDuration=(Math.random()*3+4)+"s";
+    rose.style.fontSize=(Math.random()*20+20)+"px";
+
+    document.body.appendChild(rose);
+
+    setTimeout(()=>rose.remove(),7000);
+}
+
+setInterval(createRose,500);
+
+// Magical rose storm after unlock
+function startMagicRoses(){
+    setInterval(()=>{
+        for(let i=0;i<10;i++){
+            createRose();
+        }
+    },300);
+}
+
+</script>
+
+</body>
+</html>
